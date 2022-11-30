@@ -1,11 +1,12 @@
 #include <ArduinoJson.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 #include <SPI.h>
 #include <MFRC522.h>
 int lcdColumns = 16;
 int lcdRows = 2;
 
-LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
+const int rs = A0, en = A1, d4 = A2, d5 = A3, d6 = 2, d7 = 4;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 #define SS_PIN 10
 #define RST_PIN 9
@@ -30,8 +31,6 @@ digitalWrite(red,LOW);
 digitalWrite(green,LOW);
   SPI.begin();
   mfrc522.PCD_Init();
-  lcd.init();
-  lcd.backlight();
   lcd.setCursor(2, 0);
   lcd.print("Card based");
   lcd.setCursor(5, 1);
