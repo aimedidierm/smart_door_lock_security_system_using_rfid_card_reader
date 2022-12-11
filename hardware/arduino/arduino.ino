@@ -5,15 +5,15 @@
 int lcdColumns = 16;
 int lcdRows = 2;
 
-const int rs = A0, en = A1, d4 = A2, d5 = A3, d6 = 2, d7 = 4;
+const int rs = A0, en = A1, d4 = A2, d5 = A3, d6 = A4, d7 = A5;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 #define SS_PIN 10
 #define RST_PIN 9
 #define red 8
-#define green 6
+#define green 7
 int relay=3;
-const int buto = 7; 
+const int buto = 6; 
 byte readCard[4];
 int k=0;
 String tagID = "";
@@ -22,6 +22,7 @@ MFRC522 mfrc522(SS_PIN, RST_PIN);
 boolean getID();
 int buttonState = 0;
 void setup() {
+lcd.begin(16, 2);
 pinMode(red, OUTPUT); 
 pinMode(green, OUTPUT);
 pinMode(relay,OUTPUT);
@@ -31,22 +32,26 @@ digitalWrite(red,LOW);
 digitalWrite(green,LOW);
   SPI.begin();
   mfrc522.PCD_Init();
-  lcd.setCursor(2, 0);
+  lcd.setCursor(0, 0);
   lcd.print("Card based");
-  lcd.setCursor(5, 1);
+  lcd.setCursor(0, 1);
   lcd.print("door lock");
   delay(3000);
   Serial.begin(9600);
 }
 
 void loop() {
- Serial.begin(115200);
  lcd.clear();
  lcd.setCursor(0, 0);
  lcd.print("Place Your Card");    
 
   if (getID()){
-        Serial.println((String)"?card="+tagID);
+    if (tagID == "219CC826"){
+    noaccess();
+      } else if (tagID == "61239A45"){
+    opendoor();
+      }/*
+        Serial.println((String)"card="+tagID);
         while(k==0){
           if (Serial.available() > 0) {
             //kwakira data zivuye kuri node mcu na server
@@ -61,7 +66,7 @@ void loop() {
               }
           }
           }
-              }
+              }*/
     
     }
 }
