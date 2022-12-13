@@ -16,7 +16,7 @@ int relay=3;
 const int buto = 6; 
 byte readCard[4];
 int k=0;
-String tagID = "";
+String tagID = "",data = "";
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 boolean getID();
@@ -46,17 +46,22 @@ void loop() {
  lcd.print("Place Your Card");    
 
   if (getID()){
-    if (tagID == "219CC826"){
-    noaccess();
-      } else if (tagID == "61239A45"){
-    opendoor();
-      }/*
-        Serial.println((String)"card="+tagID);
+         if (tagID == "13CAD1E"){
+          Serial.println((String)"card1="+tagID);
+          } else if (tagID == "41FCFE45"){
+            Serial.println((String)"card2="+tagID);
+          } else if (tagID == "5135A45"){
+            Serial.println((String)"card3="+tagID);
+          } else if (tagID == "B38204B"){
+            Serial.println((String)"card4="+tagID);
+          }
         while(k==0){
           if (Serial.available() > 0) {
             //kwakira data zivuye kuri node mcu na server
+          data = Serial.readStringUntil('\n');
+          Serial.println(data);
           DynamicJsonBuffer jsonBuffer;
-          JsonObject& root = jsonBuffer.parseObject(Serial.readStringUntil('\n'));
+          JsonObject& root = jsonBuffer.parseObject(data);
           if (root["cstatus"]) {
           int cstatus = root["cstatus"];
           if(cstatus==1){
@@ -66,7 +71,7 @@ void loop() {
               }
           }
           }
-              }*/
+              }
     
     }
 }
