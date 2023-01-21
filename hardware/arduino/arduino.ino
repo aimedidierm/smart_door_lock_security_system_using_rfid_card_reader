@@ -48,11 +48,11 @@ void loop() {
   if (getID()){
          if (tagID == "13CAD1E"){
           Serial.println((String)"card1="+tagID);
-          } else if (tagID == "41FCFE45"){
+          } else if (tagID == "41FCFE45"){//
             Serial.println((String)"card2="+tagID);
           } else if (tagID == "5135A45"){
             Serial.println((String)"card3="+tagID);
-          } else if (tagID == "B38204B"){
+          } else if (tagID == "B38204B"){//
             Serial.println((String)"card4="+tagID);
           }
         while(k==0){
@@ -60,8 +60,8 @@ void loop() {
             //kwakira data zivuye kuri node mcu na server
           data = Serial.readStringUntil('\n');
           Serial.println(data);
-          DynamicJsonBuffer jsonBuffer;
-          JsonObject& root = jsonBuffer.parseObject(data);
+          StaticJsonDocument<96> root;
+          DeserializationError error = deserializeJson(root, data);
           if (root["cstatus"]) {
           int cstatus = root["cstatus"];
           if(cstatus==1){
@@ -99,12 +99,12 @@ void noaccess(){
   lcd.print("allowed");
   digitalWrite(red,HIGH);
   digitalWrite(green,LOW);
-  delay(3000);
+  delay(4000);
   resetFunc();
   }
 void opendoor(){
   digitalWrite(relay,LOW);
   digitalWrite(green,HIGH);
-  delay(2000);
+  delay(5000);
   resetFunc();
   }

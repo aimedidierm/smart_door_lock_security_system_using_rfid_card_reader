@@ -3,8 +3,8 @@
 #include <WiFiClient.h>
 #include<SoftwareSerial.h>
 SoftwareSerial s(3,1);
-const char* ssid = "Virus";
-const char* password = "mbega123455";
+const char* ssid = "Balance";
+const char* password = "balance123";
 //String serverName = "http://137.184.232.255/smart_door_lock_security_system_using_rfid_card_reader/data.php";
 //String serverName = "http://didier.requestcatcher.com/";
 String serverName = "http://192.168.43.76/smart_door_lock_security_system_using_rfid_card_reader/data.php";

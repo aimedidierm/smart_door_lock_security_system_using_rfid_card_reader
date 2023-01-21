@@ -3,7 +3,7 @@ ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
 require 'php-includes/connect.php';
-if(isset($_POST['card1'])){ 
+if(isset($_REQUEST['card1'])){ 
 $card="13CAD1E";
 $query = "SELECT * FROM user WHERE card = ? limit 1";
 $stmt = $db->prepare($query);
@@ -21,7 +21,7 @@ if ($stmt->rowCount()>0) {
     echo $response = json_encode($data)."\n";
 }
 }
-if(isset($_POST['card2'])){ 
+if(isset($_REQUEST['card2'])){ 
     $card="41FCFE45";
     $query = "SELECT * FROM user WHERE card = ? limit 1";
     $stmt = $db->prepare($query);
@@ -39,7 +39,7 @@ if(isset($_POST['card2'])){
         echo $response = json_encode($data)."\n";
     }
     }
-    if(isset($_POST['card3'])){ 
+    if(isset($_REQUEST['card3'])){ 
         $card="5135A45";
         $query = "SELECT * FROM user WHERE card = ? limit 1";
         $stmt = $db->prepare($query);
@@ -57,7 +57,7 @@ if(isset($_POST['card2'])){
             echo $response = json_encode($data)."\n";
         }
         }
-        if(isset($_POST['card4'])){ 
+        if(isset($_REQUEST['card4'])){ 
             $card="B38204B";
             $query = "SELECT * FROM user WHERE card = ? limit 1";
             $stmt = $db->prepare($query);
